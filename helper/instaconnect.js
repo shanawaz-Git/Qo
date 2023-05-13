@@ -37,7 +37,6 @@ exports.igImageUpload = async () => {
       })
       .then((ans) => {
         //----------------------------------------------------------
-        console.log(ans);
         res = {
           code: 200,
           status: "Success",
