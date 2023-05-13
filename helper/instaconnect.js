@@ -5,7 +5,6 @@ const { IgApiClient } = require("instagram-private-api");
 const axios = require("axios");
 const { quotes } = require("./quotesAPI");
 const fs = require("fs");
-const { createCanvas, loadImage } = require("canvas");
 const { randomHashtag } = require("./hashtags");
 
 exports.igImageUpload = async () => {
