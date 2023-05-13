@@ -1,0 +1,17 @@
+"use Strict";
+
+require("dotenv").config();
+const { igImageUpload } = require("../helper/instaconnect");
+
+exports.IGpost = async (req, res, next) => {
+  try {
+    var resObj = await igImageUpload();
+    res.status(resObj.code).json(resObj);
+  } catch (error) {
+    res.status(400).json({
+      code: 400,
+      status: "Failure",
+      message: error.message,
+    });
+  }
+};
