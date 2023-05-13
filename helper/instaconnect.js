@@ -25,6 +25,7 @@ exports.igImageUpload = async () => {
       { responseType: "arraybuffer" }
     );
     res = instaClient(imageBuffer, captionWithHashTag);
+    console.log("invoking instaclient");
     res = {
       code: 200,
       status: "Success",
@@ -68,6 +69,7 @@ exports.igImageUpload = async () => {
 // };
 
 const instaClient = async (imageBuffer, captionWithHashTag) => {
+  console.log("invoked instaclient");
   res = {};
   const ig = new IgApiClient();
   ig.state.generateDevice(process.env.UNAME);
@@ -78,7 +80,7 @@ const instaClient = async (imageBuffer, captionWithHashTag) => {
         caption: captionWithHashTag,
       })
       .then((res) => {
-        console.log(res.status);
+        console.log("after publish to IG --> status:" + res.status);
       });
   });
 };
