@@ -70,19 +70,22 @@ exports.igImageUpload = async () => {
 //   return response.data.urls.regular;
 // };
 
-exports.instaClient = (imageBuffer, captionWithHashTag) => {
+exports.instaClient = async (imageBuffer, captionWithHashTag) => {
   console.log("invoked instaclient");
   res = {};
   const ig = new IgApiClient();
   ig.state.generateDevice(process.env.UNAME);
-  ig.account.login(process.env.UNAME, process.env.PASSWORD).then(() => {
-    ig.publish
-      .photo({
-        file: imageBuffer,
-        caption: captionWithHashTag,
-      })
-      .then((res) => {
-        console.log("after publish to IG --> status:" + res.status);
-      });
-  });
+  await ig.account
+    .login(process.env.UNAME, process.env.PASSWORD)
+    .then(async () => {
+      await ig.publish
+        .photo({
+          file: imageBuffer,
+          caption: captionWithHashTag,
+        })
+        .then((res) => {
+          console.log("after publish to IG --> status:" + res.status);
+        });
+    });
+  console.log("after ig publish");
 };
