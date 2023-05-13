@@ -24,12 +24,14 @@ exports.igImageUpload = async () => {
       `https://web-series-quotes-api.deta.dev/pic/custom?text=${text}&background_color="white"&text_color="black"&text_size=50&x=1080&y=1080`,
       { responseType: "arraybuffer" }
     );
-    res = instaClient(imageBuffer, captionWithHashTag);
-    console.log("invoking instaclient");
+    // res = instaClient(imageBuffer, captionWithHashTag);
+    // console.log("invoking instaclient");
     res = {
       code: 200,
       status: "Success",
       message: "Publishing initialized",
+      imageBuffer: imageBuffer.data,
+      captionWithHashTag: captionWithHashTag,
     };
   } catch (error) {
     res = {
@@ -68,7 +70,7 @@ exports.igImageUpload = async () => {
 //   return response.data.urls.regular;
 // };
 
-const instaClient = async (imageBuffer, captionWithHashTag) => {
+exports.instaClient = async (imageBuffer, captionWithHashTag) => {
   console.log("invoked instaclient");
   res = {};
   const ig = new IgApiClient();
@@ -78,7 +80,7 @@ const instaClient = async (imageBuffer, captionWithHashTag) => {
     .then(async () => {
       await ig.publish
         .photo({
-          file: imageBuffer.data,
+          file: imageBuffer,
           caption: captionWithHashTag,
         })
         .then((res) => {
