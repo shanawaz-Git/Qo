@@ -72,9 +72,13 @@ const instaClient = async (imageBuffer, captionWithHashTag) => {
   const ig = new IgApiClient();
   ig.state.generateDevice(process.env.UNAME);
   ig.account.login(process.env.UNAME, process.env.PASSWORD).then(() => {
-    ig.publish.photo({
-      file: imageBuffer.data,
-      caption: captionWithHashTag,
-    });
+    ig.publish
+      .photo({
+        file: imageBuffer.data,
+        caption: captionWithHashTag,
+      })
+      .then((res) => {
+        console.log(res.status);
+      });
   });
 };
