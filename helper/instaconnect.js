@@ -29,8 +29,6 @@ exports.igImageUpload = async () => {
       code: 200,
       status: "Success",
       message: "Publishing initialized",
-      imageBuffer: imageBuffer.data,
-      captionWithHashTag: captionWithHashTag,
     };
   } catch (error) {
     res = {
@@ -42,22 +40,20 @@ exports.igImageUpload = async () => {
   return res;
 };
 
-exports.instaClient = async (imageBuffer, captionWithHashTag) => {
+exports.instaClient = (imageBuffer, captionWithHashTag) => {
   console.log("invoked instaclient");
   res = {};
   const ig = new IgApiClient();
   ig.state.generateDevice(process.env.UNAME);
-  await ig.account
-    .login(process.env.UNAME, process.env.PASSWORD)
-    .then(async () => {
-      await ig.publish
-        .photo({
-          file: imageBuffer,
-          caption: captionWithHashTag,
-        })
-        .then((res) => {
-          console.log("after publish to IG --> status:" + res.status);
-        });
-    });
+  ig.account.login(process.env.UNAME, process.env.PASSWORD).then(() => {
+    ig.publish
+      .photo({
+        file: imageBuffer,
+        caption: captionWithHashTag,
+      })
+      .then((res) => {
+        console.log("after publish to IG --> status:" + res.status);
+      });
+  });
   console.log("after ig publish");
 };
