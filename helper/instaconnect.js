@@ -24,6 +24,7 @@ exports.igImageUpload = async () => {
       `https://web-series-quotes-api.deta.dev/pic/custom?text=${text}&background_color="white"&text_color="black"&text_size=50&x=1080&y=1080`,
       { responseType: "arraybuffer" }
     );
+    await this.instaClient(imageBuffer.data, captionWithHashTag);
     res = {
       code: 200,
       status: "Success",
