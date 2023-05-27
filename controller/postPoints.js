@@ -1,7 +1,7 @@
 "use Strict";
 
 require("dotenv").config();
-const { igImageUpload, instaClient } = require("../helper/instaconnect");
+const { igImageUpload } = require("../helper/instaconnect");
 
 exports.IGpost = async (req, res, next) => {
   try {
