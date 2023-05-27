@@ -94,11 +94,11 @@ exports.igImageUpload = async () => {
     //   if (err) throw err;
     //   console.log("The image was saved!");
     // });
-    // res = {
-    //   code: 200,
-    //   status: "Success",
-    //   message: "Publishing initialized",
-    // };
+    res = {
+      code: 200,
+      status: "Success",
+      message: "Publishing initialized",
+    };
   } catch (error) {
     res = {
       code: 403,
